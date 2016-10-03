@@ -1,0 +1,209 @@
+gui/controlpanels/EditOneVehicleControlPanel.java:71:	/** The input field for the speed in km/h. */
+gui/controlpanels/EditOneVehicleControlPanel.java:72:	private final JFormattedTextField speed_;
+gui/controlpanels/EditOneVehicleControlPanel.java:215:		JLabel label = new JLabel(Messages.getString("EditOneVehicleControlPanel.speed")); //$NON-NLS-1$
+gui/controlpanels/EditOneVehicleControlPanel.java:218:		speed_ = new JFormattedTextField(NumberFormat.getIntegerInstance());
+gui/controlpanels/EditOneVehicleControlPanel.java:219:		speed_.setValue(100);
+gui/controlpanels/EditOneVehicleControlPanel.java:425:								speed_.setValue((int)Math.round(vehicle.getMaxSpeed() / (100000.0/3600)));
+gui/controlpanels/EditOneVehicleControlPanel.java:492:					tmpVehicle = new Vehicle(destinations, ((Number)vehicleLength_.getValue()).intValue(), (int)Math.round(((Number)speed_.getValue()).intValue() * 100000.0/3600), ((Number)commDist_.getValue()).intValue()*100, wifi_.isSelected(), emergencyVehicle_.isSelected(), ((Number) brakingRate_.getValue()).intValue(), ((Number)accelerationRate_.getValue()).intValue(), ((Number)timeDistance_.getValue()).intValue(), ((Number)politeness_.getValue()).intValue(), getColorPreview().getBackground());
+gui/controlpanels/EditOneVehicleControlPanel.java:635:					speed_.setValue((int)Math.round((tmpVehicleType.getMaxSpeed() / (100000.0/3600) + tmpVehicleType.getMinSpeed() / (100000.0/3600)) / 2));
+gui/controlpanels/EditOneVehicleControlPanel.java:730:	 * Gets the vehicle speed TextField
+gui/controlpanels/EditOneVehicleControlPanel.java:732:	 * @return the speed_ TextField
+gui/controlpanels/EditOneVehicleControlPanel.java:735:		return speed_;
+gui/controlpanels/EditStreetControlPanel.java:54:	/** An array with all speeds for the presets in km/h (!). Note that all preset arrays must have the same size! */
+gui/controlpanels/EditStreetControlPanel.java:124:	/** The input field for the speed of a new street. */
+gui/controlpanels/EditStreetControlPanel.java:127:	/** The input field for the speed of an edited street. */
+gui/controlpanels/EditStreetControlPanel.java:283:		jLabel1 = new JLabel(Messages.getString("EditStreetControlPanel.speed")); //$NON-NLS-1$
+gui/controlpanels/EditStreetControlPanel.java:391:		jLabel1 = new JLabel(Messages.getString("EditStreetControlPanel.speed")); //$NON-NLS-1$
+gui/controlpanels/EditVehicleControlPanel.java:53:	/** The input field for the minimum speed. */
+gui/controlpanels/EditVehicleControlPanel.java:56:	/** The input field for the maximum speed. */
+gui/controlpanels/EditVehicleControlPanel.java:105:	private final JFormattedTextField speedStreetRestriction_;
+gui/controlpanels/EditVehicleControlPanel.java:326:		speedStreetRestriction_ = new JFormattedTextField(NumberFormat.getIntegerInstance());
+gui/controlpanels/EditVehicleControlPanel.java:327:		speedStreetRestriction_.setPreferredSize(new Dimension(60,20));
+gui/controlpanels/EditVehicleControlPanel.java:328:		speedStreetRestriction_.setValue(80);
+gui/controlpanels/EditVehicleControlPanel.java:330:		add(speedStreetRestriction_,c);
+gui/controlpanels/EditVehicleControlPanel.java:389:					int speedRestriction = (int)Math.round(((Number)speedStreetRestriction_.getValue()).intValue() * 100000.0/3600);
+gui/controlpanels/EditVehicleControlPanel.java:423:								if(tmpWayPoint.getStreet().getSpeed() <= speedRestriction){
+gui/controlpanels/ReportingControlPanel.java:324:		double speed = 0;
+gui/controlpanels/ReportingControlPanel.java:338:						speed += vehicle.getCurSpeed();
+gui/controlpanels/ReportingControlPanel.java:357:		if(activeVehicles > 0) statisticsText_.append(INTEGER_FORMAT_FRACTION.format(speed/activeVehicles/100000*3600));
+gui/controlpanels/ReportingControlPanel.java:408:	 * @param speed			the speed of the vehicle
+gui/controlpanels/ReportingControlPanel.java:411:	public synchronized void addBeacon(Vehicle vehicle, long ID, long x, long y, double speed, boolean isEncrypted){
+gui/controlpanels/ReportingControlPanel.java:417:		beaconInfoText_.append(speed);
+gui/controlpanels/ReportingControlPanel.java:433:	 * @param speed			the speed of the vehicle
+gui/controlpanels/ReportingControlPanel.java:437:	public synchronized void addBeacon(Vehicle vehicle, long ID, long x, long y, double speed, boolean isEncrypted, boolean isForwared){
+gui/controlpanels/ReportingControlPanel.java:443:		beaconInfoText_.append(speed);
+gui/controlpanels/SimulateControlPanel.java:63:	/** The input field for the target step time. Used to increase or decrease simulation speed. */
+gui/controlpanels/VehicleTypeDialog.java:55:	/** The input field for the minimum speed. */
+gui/controlpanels/VehicleTypeDialog.java:58:	/** The input field for the maximum speed. */
+gui/helpers/LogOperations.java:775:		//constant variable (max. driving speed of a vehicle)
+gui/helpers/LogOperations.java:846:								//calculates how far the vehicle could drive at full speed
+gui/helpers/LogOperations.java:908:								//calculate expected way using the street speed the silent period time and a gui element to tune the value
+gui/helpers/LogOperations.java:1120:		//constant variable (max. driving speed of a vehicle)
+gui/helpers/LogOperations.java:1195:								//calculates how far the vehicle could drive at full speed
+gui/helpers/LogOperations.java:1286:								//calculate expected way using the street speed the silent period time and a gui element to tune the value
+gui/helpers/VehicleType.java:16:	/** The max speed of the vehicle type.*/
+gui/helpers/VehicleType.java:19:	/** The min speed of the vehicle type.*/
+gui/helpers/VehicleType.java:71:	 * @param maxSpeed					the maximum speed of this vehicle type in cm/s
+gui/helpers/VehicleType.java:72:	 * @param minSpeed					the minimum speed of this vehicle in cm/s
+gui/helpers/VehicleType.java:118:	 * Gets the maximum speed of the vehicle type.
+gui/helpers/VehicleType.java:127:	 * Set the maximum speed
+gui/helpers/VehicleType.java:129:	 * @param maxSpeed the maximum speed in cm/s
+gui/helpers/VehicleType.java:145:	 * Set the minimum speed
+gui/helpers/VehicleType.java:147:	 * @param minSpeed the maximum speed in cm/s.
+gui/helpers/VehicleTypeXML.java:86:							} else if(typCrsr.getLocalName().toLowerCase().equals("maxspeed")){ //$NON-NLS-1$
+gui/helpers/VehicleTypeXML.java:88:							} else if(typCrsr.getLocalName().toLowerCase().equals("minspeed")){ //$NON-NLS-1$
+gui/Renderer.java:821:			if(zoom_ > 0.0001) detailedView = true;	// only show fast speed streets if zoom is very far away
+localization/messages.properties:104:EditStreetControlPanel.speed=Speed (km/h)\: 
+localization/messages.properties:123:EditVehicleControlPanel.maxSpeed=Max. speed (km/h)\:
+localization/messages.properties:126:EditVehicleControlPanel.minSpeed=Min. speed (km/h)\:
+localization/messages.properties:129:EditVehicleControlPanel.onlyOnLowerSpeedStreets=Only on streets with<br>speed &lt; than (km/h)\:
+localization/messages.properties:147:EditOneVehicleControlPanel.speed=Speed (km/h)\:
+localization/messages.properties:192:LogAnalyserDialog.standardMixAttackNote=Standard mix-zone attack:\nThe expected way is calculated with the mix-zone-radius and the max. street speed. With this information the exit time can be guessed.
+localization/messages.properties:194:LogAnalyserDialog.standardSilentPeriodAttackNote=Standard silent-period attack:\nThe expected way is calculated with the silent-period-duration and the max. street speed. With this information the exit time can be guessed.
+localization/messages.properties:195:LogAnalyserDialog.advancedSilentPeriodAttackNote=Advanced Silent-Period attack:\nThe expected way is calculated with the silent-period-duration and the max. street speed. Then the direction vector is used to prolonged with this value.
+localization/messages.properties:265:VehicleTypeDialog.minSpeed=Min. speed (km/h)\:
+localization/messages.properties:266:VehicleTypeDialog.maxSpeed=Max. speed (km/h)\: 
+localization/messages.properties:359:MouseClickManager.streetSpeed=Max. speed\: 
+localization/messages.properties:367:MouseClickManager.vehiclesCurrentSpeed=Current speed\: 
+localization/messages.properties:381:ReportingControlPanel.averageSpeed=Average speed\: 
+localization/messages.properties:391:ReportingControlPanel.legend=time\nID,speed\nx,y
+localization/messages_de_DE.properties:105:EditStreetControlPanel.speed=Geschwindigkeit (km/h)\: 
+localization/messages_de_DE.properties:148:EditOneVehicleControlPanel.speed=Geschwindigkeit (km/h)\: 
+map/Junction.java:19:	 * the max. speed of the street with this factor. Measured in seconds. */
+map/Map.java:318:											} else if(childtype.equals("speed")){ //$NON-NLS-1$
+map/MapHelper.java:519:	 * the <code>lowerspeedStreet</code>.
+map/Node.java:130:				//1. rule: try to find a street which is continuing (has same name) and take the one with the highest speed if there is more than one
+map/Node.java:145:				//2. rule: take the two streets with highest speed. If two of the three highest are oneway, add a third one.
+map/OSM/OSMLoader.java:80:			int i=0, id, maxspeed, isOneway, lanes;
+map/OSM/OSMLoader.java:82:			boolean maxspeedSet, onewaySet, isRoundabout, laneSet, correctionSet = false, hasTrafficSignal;
+map/OSM/OSMLoader.java:171:								maxspeedSet = false;	// if value has been set by an explicit maxspeed-key then don't overwrite it based on streettype!
+map/OSM/OSMLoader.java:178:								maxspeed = -1;
+map/OSM/OSMLoader.java:200:												if(maxspeedSet == false){
+map/OSM/OSMLoader.java:201:													maxspeed = 130*100000/3600;
+map/OSM/OSMLoader.java:206:												if(maxspeedSet == false){
+map/OSM/OSMLoader.java:207:													maxspeed = 70*100000/3600;
+map/OSM/OSMLoader.java:211:												if(maxspeedSet == false){
+map/OSM/OSMLoader.java:212:													maxspeed = 110*100000/3600;
+map/OSM/OSMLoader.java:216:												if(maxspeedSet == false){
+map/OSM/OSMLoader.java:217:													maxspeed = 70*100000/3600;
+map/OSM/OSMLoader.java:221:												if(maxspeedSet == false){
+map/OSM/OSMLoader.java:222:													maxspeed = 100*100000/3600;
+map/OSM/OSMLoader.java:226:												if(maxspeedSet == false){
+map/OSM/OSMLoader.java:227:													maxspeed = 70*100000/3600;
+map/OSM/OSMLoader.java:231:												if(maxspeedSet == false){
+map/OSM/OSMLoader.java:232:													maxspeed = 100*100000/3600;
+map/OSM/OSMLoader.java:236:												if(maxspeedSet == false){
+map/OSM/OSMLoader.java:237:													maxspeed = 90*100000/3600;
+map/OSM/OSMLoader.java:240:												if(maxspeedSet == false){
+map/OSM/OSMLoader.java:241:													maxspeed = 70*100000/3600;
+map/OSM/OSMLoader.java:244:												if(maxspeedSet == false){
+map/OSM/OSMLoader.java:245:													maxspeed = 70*100000/3600;
+map/OSM/OSMLoader.java:248:												if(maxspeedSet == false){
+map/OSM/OSMLoader.java:249:													maxspeed = 30*100000/3600;
+map/OSM/OSMLoader.java:252:												if(maxspeedSet == false){
+map/OSM/OSMLoader.java:253:													maxspeed = 10*100000/3600;
+map/OSM/OSMLoader.java:256:												if(maxspeedSet == false){
+map/OSM/OSMLoader.java:257:													maxspeed = 2*100000/3600;
+map/OSM/OSMLoader.java:260:												if(maxspeedSet == false){
+map/OSM/OSMLoader.java:261:													maxspeed = -1;
+map/OSM/OSMLoader.java:268:											if(maxspeedSet == false){
+map/OSM/OSMLoader.java:269:												maxspeed = 120*100000/3600;
+map/OSM/OSMLoader.java:270:												maxspeedSet = true;
+map/OSM/OSMLoader.java:272:										} else if (key.equals("tracktype") && maxspeedSet == false){	//see http://wiki.openstreetmap.org/index.php/Proposed_features/grade1-5 (link last visited: 22.09.2008) (all other tracks stay at 2km/h //$NON-NLS-1$
+map/OSM/OSMLoader.java:273:											if(value.equals("grade1") && maxspeed < 10*100000/3600){ //$NON-NLS-1$
+map/OSM/OSMLoader.java:274:												maxspeed = 10*100000/3600;		//grade1 is a paved track so 10km/h should be possible there
+map/OSM/OSMLoader.java:275:												maxspeedSet = true;
+map/OSM/OSMLoader.java:277:											else if(value.equals("grade2") && maxspeed < 5*100000/3600){ //$NON-NLS-1$
+map/OSM/OSMLoader.java:278:												maxspeed = 5*100000/3600;	//grade2 is a track with gravel so 5km/h should be possible there
+map/OSM/OSMLoader.java:279:												maxspeedSet = true;
+map/OSM/OSMLoader.java:281:										} else if (key.equals("maxspeed")){ //$NON-NLS-1$
+map/OSM/OSMLoader.java:283:												maxspeed = Integer.parseInt(value)*100000/3600;
+map/OSM/OSMLoader.java:284:												maxspeedSet = true;
+map/OSM/OSMLoader.java:304:								if(maxspeed > 0){		// if we don't have a maxspeed set previously it's probably not a street for cars
+map/OSM/OSMLoader.java:319:												map.addStreet(new Street(streetName, lastNode, node, streetType, isOneway, lanes, displayColor, map.getRegionOfPoint(node.getX(), node.getY()), maxspeed));
+map/OSM/OSMLoader.java:333:													map.addStreet(new Street(streetName, node, lastNode, streetType, isOneway, lanes, displayColor, map.getRegionOfPoint(lastNode.getX(), lastNode.getY()), maxspeed));
+map/Region.java:193:						else if(street.getSpeed() > otherStreet.getSpeed()) MapHelper.calculateBridges(otherStreet, street);		//decide on speed
+map/Region.java:228:						else if(firstStreet.getSpeed() > secondStreet.getSpeed()) MapHelper.calculateBridges(secondStreet, firstStreet);		//decide on speed
+map/Street.java:43:	/** The maximum speed allowed on this street. */
+map/Street.java:101:	 * @param maxSpeed 		the maximum speed allowed on this street
+map/Street.java:175:	 * Gets the speed.
+map/Street.java:177:	 * @return the speed
+map/Street.java:184:	 * Sets the maximum speed.
+map/Street.java:186:	 * @param maxSpeed the new speed
+routing/A_Star/A_Star_Algorithm.java:38:	 * @param mode				The mode in which to operate. <code>0</code> means calculating with street lengths, <code>1</code> means calculating based on speed/time 
+routing/A_Star/A_Star_Algorithm.java:51:	 * @param additionalVar 	can be used to set the maximum speed for calculations in <code>mode=1</code>
+routing/A_Star/A_Star_Algorithm.java:60:		int speed;
+routing/A_Star/A_Star_Algorithm.java:90:				if(startStreet.getSpeed() > additionalVar) speed = additionalVar;
+routing/A_Star/A_Star_Algorithm.java:91:				else speed = startStreet.getSpeed();
+routing/A_Star/A_Star_Algorithm.java:92:				startNode.setF(startStreetPos/speed);
+routing/A_Star/A_Star_Algorithm.java:93:				startNode.setG(startStreetPos/speed);
+routing/A_Star/A_Star_Algorithm.java:112:				if(startStreet.getSpeed() > additionalVar) speed = additionalVar;
+routing/A_Star/A_Star_Algorithm.java:113:				else speed = startStreet.getSpeed();
+routing/A_Star/A_Star_Algorithm.java:114:				startNode.setF((startStreet.getLength() - startStreetPos)/speed);
+routing/A_Star/A_Star_Algorithm.java:115:				startNode.setG((startStreet.getLength() - startStreetPos)/speed);
+routing/A_Star/A_Star_Algorithm.java:132:						if(targetStreet.getSpeed() > additionalVar) speed = additionalVar;
+routing/A_Star/A_Star_Algorithm.java:133:						else speed = targetStreet.getSpeed();
+routing/A_Star/A_Star_Algorithm.java:134:						f = currentNode.getF() + ((targetStreet.getLength() - targetStreetPos)/speed);
+routing/A_Star/A_Star_Algorithm.java:149:						if(targetStreet.getSpeed() > additionalVar) speed = additionalVar;
+routing/A_Star/A_Star_Algorithm.java:150:						else speed = targetStreet.getSpeed();
+routing/A_Star/A_Star_Algorithm.java:151:						f = currentNode.getF() + (targetStreetPos/speed);
+routing/A_Star/A_Star_Algorithm.java:205:							f = g + (distance/additionalVar);	//approximation based on maxspeed (stored in additionalVar) so that real time is always underestimated!
+routing/A_Star/A_Star_Algorithm.java:214:							if(target1found && successor.getRealNode() == targetStreet.getEndNode()){	//if the target street has a low speed we might overwrite it here with a wrong guessed value => calculate it precise!
+routing/A_Star/A_Star_Algorithm.java:217:									if(targetStreet.getSpeed() > additionalVar) speed = additionalVar;
+routing/A_Star/A_Star_Algorithm.java:218:									else speed = targetStreet.getSpeed();
+routing/A_Star/A_Star_Algorithm.java:219:									f = g + ((targetStreet.getLength() - targetStreetPos)/speed);
+routing/A_Star/A_Star_Algorithm.java:230:									if(targetStreet.getSpeed() > additionalVar) speed = additionalVar;
+routing/A_Star/A_Star_Algorithm.java:231:									else speed = targetStreet.getSpeed();
+routing/A_Star/A_Star_Algorithm.java:232:									f = g + (targetStreetPos/speed);
+routing/A_Star/A_Star_Algorithm.java:262:	 * @param mode				The mode in which to operate. <code>0</code> means calculating with street lengths, <code>1</code> means calculating based on speed/time 
+routing/A_Star/A_Star_Algorithm.java:277:	 * @param additionalVar		can be used to set the maximum speed for calculations in <code>mode=1</code>
+scenario/KnownVehicle.java:21:	/** The current speed. */
+scenario/KnownVehicle.java:22:	private double speed_;
+scenario/KnownVehicle.java:44:	 * @param speed		the current speed
+scenario/KnownVehicle.java:47:	public KnownVehicle(Vehicle vehicle, long ID, int x, int y, int time, double speed, boolean isEncrypted){
+scenario/KnownVehicle.java:52:		speed_ = speed;
+scenario/KnownVehicle.java:86:	 * Updates the speed.
+scenario/KnownVehicle.java:88:	 * @param speed	the current speed
+scenario/KnownVehicle.java:90:	public void setSpeed(double speed){
+scenario/KnownVehicle.java:91:		speed_ = speed;
+scenario/KnownVehicle.java:122:	 * Gets the speed
+scenario/KnownVehicle.java:124:	 * @return the speed
+scenario/KnownVehicle.java:127:		return speed_;
+scenario/KnownVehiclesList.java:49:	 * @param speed		the speed
+scenario/KnownVehiclesList.java:54:	public synchronized void updateVehicle(Vehicle vehicle, long ID, int x, int y, double speed, long sourceID, boolean isEncrypted, boolean isARSU){
+scenario/KnownVehiclesList.java:65:				next.setSpeed(speed);
+scenario/KnownVehiclesList.java:74:			next = new KnownVehicle(vehicle, ID, x, y, timePassed_, speed, isEncrypted);
+scenario/KnownVehiclesList.java:86:						if(Renderer.getInstance().getAttackedVehicle() != null && Renderer.getInstance().getAttackedVehicle().getID() == ID) AttackLogWriter.log(Renderer.getInstance().getTimePassed() + ":Source(Attacker-RSU):" + sourceID + ":Attacked-Vehicle Data:" + Long.toHexString(ID) + ":" +  x + ":" +  y + ":"+ speed + ":" + isEncrypted );
+scenario/KnownVehiclesList.java:87:						else AttackLogWriter.log(Renderer.getInstance().getTimePassed() + ":Source(Attacker-RSU):" + sourceID + ":Other-Vehicle Data:" + Long.toHexString(ID) + ":" +  x + ":" +  y + ":"+ speed + ":" + isEncrypted );
+scenario/KnownVehiclesList.java:91:						if(Renderer.getInstance().getAttackedVehicle() != null && Renderer.getInstance().getAttackedVehicle().getID() == ID) AttackLogWriter.log(Renderer.getInstance().getTimePassed() + ":Source(Attacker):"+ Long.toHexString(sourceID) + ":Attacked-Vehicle-Data:" + Long.toHexString(ID) + ":" + x + ":" +  y + ":"+ speed + ":" + isEncrypted);
+scenario/KnownVehiclesList.java:92:						else AttackLogWriter.log(Renderer.getInstance().getTimePassed() + ":Source(Attacker):"+ Long.toHexString(sourceID) + ":Other-Vehicle-Data:" + Long.toHexString(ID) + ":" + x + ":" +  y + ":"+ speed + ":" + isEncrypted);
+scenario/KnownVehiclesList.java:95:			}else AttackLogWriter.log(Renderer.getInstance().getTimePassed() + ":Any Communication:" + sourceID + ":Any-Vehicle Data:" + Long.toHexString(ID) + ":" +  x + ":" +  y + ":"+ speed + ":" + isEncrypted);
+scenario/LaneObject.java:23:	/** The current speed measured in cm/s. */
+scenario/LaneObject.java:81:	 * Gets the current speed of this object.
+scenario/LaneObject.java:83:	 * @return the current speed in cm/s
+scenario/Scenario.java:332:									} else if(vehicleCrsr.getLocalName().toLowerCase().equals("maxspeed")){ //$NON-NLS-1$
+scenario/Vehicle.java:52:	/** If a vehicle does not move (speed=0) for this time (in milliseconds), a jam is detected and a penalty message created. */
+scenario/Vehicle.java:184:	/** The maximum speed of this car in cm/s. */
+scenario/Vehicle.java:231:	/** The new speed after the step. <code>curSpeed_</code> will be set to this in the moving-process to circumvent synchronisation problems. */
+scenario/Vehicle.java:252:	/** The speed at last braking distance calculation. */
+scenario/Vehicle.java:253:	private double speedAtLastBrakingDistanceCalculation_ = 0;
+scenario/Vehicle.java:364:	 * @param maxSpeed			the maximum speed of this vehicle in cm/s
+scenario/Vehicle.java:535:	 * Adjust the speed if reaching crossings or other cars. It also checks if the vehicle should get active.
+scenario/Vehicle.java:554:				//curBrakingDistance always needs to be up-to-date but speed normally doesn't change too often...
+scenario/Vehicle.java:555:				if(curSpeed_ != speedAtLastBrakingDistanceCalculation_){
+scenario/Vehicle.java:556:					speedAtLastBrakingDistanceCalculation_ = curSpeed_;
+scenario/Vehicle.java:597:								destinationCheckCountdown_ = (int)StrictMath.floor(0.5d + (distance-maxBrakingDistance_)/maxSpeed_*1000);	//set time to recheck (using calculated distance and maximum speed!
+scenario/Vehicle.java:600:					} else destinationCheckCountdown_ = (int)StrictMath.floor(0.5d + ((StrictMath.sqrt(distanceSquared)-maxBrakingDistance_)/maxSpeed_)*1000);		//set time to recheck (using minimum distance and maximum speed => can never be too high (vehicle might accelerate)!
+scenario/Vehicle.java:673:				else if (newSpeed_ < 0) newSpeed_ = 0;	//no negative speed
+scenario/Vehicle.java:1238:				// Check if next street has smaller speed limit
+scenario/Vehicle.java:1287:	 * 	<code>2</code> if braking is necessary because of a lower speed street or junction
+scenario/Vehicle.java:1372:				// Check if next street has smaller speed limit
+scenario/Vehicle.java:1955:			// Step 1: Move the vehicle according to its speed
+scenario/Vehicle.java:2125:							//update speed if attacker is to near / to far
+scenario/Vehicle.java:2332:		speedAtLastBrakingDistanceCalculation_ = 0;
+scenario/Vehicle.java:2506:	 * Gets the maximum speed of this vehicle.
+scenario/Vehicle.java:2508:	 * @return the maximum speed in cm/s
+scenario/Vehicle.java:3015:	 * Sets the maximum speed
+scenario/Vehicle.java:3017:	 * @param maxSpeed the speed in cm/s
+simulation/WorkerThread.java:58:	 * @param barrierDuringWork	the barrier after adjusting the speed
+simulation/WorkerThread.java:151:			// Step 3: Adjust speed, do message cleanup and create jam messages
