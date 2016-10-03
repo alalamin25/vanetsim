@@ -17,6 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -334,15 +335,16 @@ public final class ReportingControlPanel extends JPanel implements ActionListene
 		for(i = 0; i < regions.length; ++i){
 			for(j = 0; j < regions[i].length; ++j){
 				vehicles = regions[i][j].getVehicleArray();				
-				if(staticsRunCount > 1 && vehicles.length > 3){
-					if(!boolHasPirntedLog){
-						boolHasPirntedLog = true;
-						LogVehicleData logVehicleData = new LogVehicleData();
-						System.out.println("\n\n ****Going to call VehicleInfo\n");
-						logVehicleData.writeVehicleInfo(vehicles);
-					}
-					
-				}
+//				if(staticsRunCount > 1 && vehicles.length > 3){
+//					if(!boolHasPirntedLog){
+//						boolHasPirntedLog = true;
+////						LogVehicleData logVehicleData = new LogVehicleData();
+////						System.out.println("\n\n ****Going to call VehicleInfo\n");
+////						ArrayList<Vehicle> vehiclesList = logVehicleData.getAllVehicle();
+////						logVehicleData.writeVehicleInfo(vehiclesList);
+//					}
+//					
+//				}
 				
 				for(k = 0; k < vehicles.length; ++k){
 					vehicle = vehicles[k];
@@ -531,6 +533,8 @@ public final class ReportingControlPanel extends JPanel implements ActionListene
 		if ("refresh".equals(command)){ //$NON-NLS-1$
 			if(VanetSimStart.getSimulationMaster().isSimulationRunning()) statisticsCountdown_ = -1;
 			else updateStatistics();
+			LogVehicleData logVehicleData = new LogVehicleData();
+			logVehicleData.logAllVehicleInfo();
 		} else if ("deleteBeaconInfo".equals(command)){ //$NON-NLS-1$
 			StringSelection ss = new StringSelection(beaconInfoTextArea_.getText());
 			Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);

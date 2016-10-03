@@ -87,6 +87,8 @@ public final class VanetSimStart implements Runnable {
 		ReRenderManager.getInstance().start();
 		MouseClickManager.getInstance().setDrawArea(drawarea);
 		MouseClickManager.getInstance().start();
+		
+		System.out.println("In vanetsim starter method");
 	}
 
 	/**
