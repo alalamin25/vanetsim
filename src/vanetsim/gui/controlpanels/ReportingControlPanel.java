@@ -34,6 +34,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.filechooser.FileFilter;
 
+import log.custom.LogVehicleData;
 import vanetsim.VanetSimStart;
 import vanetsim.gui.Renderer;
 import vanetsim.gui.helpers.ButtonCreator;
@@ -125,7 +126,9 @@ public final class ReportingControlPanel extends JPanel implements ActionListene
 	
 	/** FileFilter to choose only ".log" files from FileChooser */
 	private FileFilter logFileFilter_;
-
+	
+	/** Temp variable to count up statics update times 	 */
+    private int staticsRunCount=0;
 	/**
 	 * Constructor for this control panel.
 	 */
@@ -307,6 +310,8 @@ public final class ReportingControlPanel extends JPanel implements ActionListene
 	 * Updates the statistics. You need to make sure that the vehicles are not modified while executing this.
 	 */
 	private final void updateStatistics(){
+		staticsRunCount++; // Incrementing No of times this method is run
+		System.out.println("In updateStatics Method: " + staticsRunCount);
 		statisticsText_.setLength(0); 	//reset
 		
 		Region[][] regions = Map.getInstance().getRegions();
@@ -323,11 +328,26 @@ public final class ReportingControlPanel extends JPanel implements ActionListene
 		double travelTime = 0;
 		double speed = 0;
 		double knownVehicles = 0;
+		System.out.println("just about to go into vehicle loop");
+		
+		Boolean boolHasPirntedLog = false;
 		for(i = 0; i < regions.length; ++i){
 			for(j = 0; j < regions[i].length; ++j){
-				vehicles = regions[i][j].getVehicleArray();
+				vehicles = regions[i][j].getVehicleArray();				
+				if(staticsRunCount > 1 && vehicles.length > 3){
+					if(!boolHasPirntedLog){
+						boolHasPirntedLog = true;
+						LogVehicleData logVehicleData = new LogVehicleData();
+						System.out.println("\n\n ****Going to call VehicleInfo\n");
+						logVehicleData.writeVehicleInfo(vehicles);
+					}
+					
+				}
+				
 				for(k = 0; k < vehicles.length; ++k){
 					vehicle = vehicles[k];
+
+					
 					if(vehicle.getTotalTravelTime() > 0){
 						++travelledVehicles;
 						travelDistance += vehicle.getTotalTravelDistance();
@@ -344,6 +364,7 @@ public final class ReportingControlPanel extends JPanel implements ActionListene
 							messagesCreated += vehicle.getMessagesCreated();
 						}
 					}
+
 				}
 			}
 		}
