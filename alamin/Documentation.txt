@@ -1,0 +1,40 @@
+Created log.custom package to keep all the custom class for logging there
+Added custom on close code to vanetsim.start class
+vanetsim.gui.controlpanels; simulationGuiControlpanle for start pause button
+
+map and scenery is autoloaded from /bin/debug folder... settings folder is whether debug is on or not
+
+auto map load is added at vanetsim.vanetsimstart.java
+scenerio auto load is added vanetsim.gui.controlpanel >> simulatecontrolpanel.java 317 no line
+
+vehicle reaches its destination in move methods 2090 line and loginfoupdated is called
+
+when refresh button is clicked log is saved to file
+package vanetsim.gui.controlpanels; reporting congrol
+package vanetsim.scenario; vehicle
+
+Creating a new class vehicleStreetInfo in vehicle.class file to log vehicles individual street log
+Street change is 2066 no line in vehicle method 
+
+created a new class in custom log file vehicle street info to log street info
+
+when close icon is clicked the vanet.starter.java method's public void windowClosing(WindowEvent e)  method is called where we can do clean up tasks
+
+
+
+
+
+# adding waypoing/steet's max wait time
+waypoint vanetsim.routing.waypoint 
+vanet.sim.map street
+updateVehicleStreetLogInfo() method is called to update waittime, at every move method of vehicle class
+
+vanet.simulation.worker_thread adjust speed of the vehicle
+
+When trafic light is found curwaittime is not changed vehicle speed is made 0
+
+stopTime_ the amount of time vehicle is waiting in traffic jam
+vanetsim.map trafic light red, yellow, green
+
+
+file write is initiated and closed on vanetsim.vanetsimstart.java file

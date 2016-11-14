@@ -1,0 +1,20 @@
+Oct 17, 2016 7:14:09 PM global
+CONFIG: -1936MB accelerated VRAM found.
+Oct 17, 2016 7:14:10 PM vanetsim.map.Map loadMap
+FINE: Loading map from map.xml
+Oct 17, 2016 7:14:10 PM vanetsim.scenario.Scenario load
+FINE: Loading scenario from scnerio.xml
+Oct 17, 2016 7:14:10 PM vanetsim.scenario.Scenario load
+SEVERE: Error while loading scenario.
+scnerio.xml (The system cannot find the file specified)
+java.io.FileNotFoundException: scnerio.xml (The system cannot find the file specified)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at vanetsim.scenario.Scenario.load(Scenario.java:149)
+	at vanetsim.VanetSimStart$3.run(VanetSimStart.java:143)
+	at java.lang.Thread.run(Unknown Source)
+
+Oct 17, 2016 7:14:18 PM vanetsim.map.Map load
+FINE: Finished loading map.
+Oct 17, 2016 7:14:18 PM vanetsim.scenario.Scenario load
+FINE: Finished loading scenario.

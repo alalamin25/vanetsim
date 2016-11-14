@@ -3,6 +3,7 @@ package log.custom;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
@@ -17,16 +18,22 @@ import vanetsim.scenario.Vehicle;
 public class LogVehicleData {
 	private Writer writer = null;
 	private String outputFileName = "logs/log_output.txt" ;
+	private static String fileWriterFileName = "logs/vehicle_street_log.txt";
+	public static FileWriter fileWriter; 
 	
 	public LogVehicleData(){
 		
 	    try {
 			writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream(outputFileName), "utf-8"));
+			
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -35,6 +42,8 @@ public class LogVehicleData {
 	
 	/**
 	 * This Method is a helper method to get all the vehicles active or inactive in the map
+	 * Map has all the regions and regions has all the vehicles.
+	 * 
 	 * @returns an arraylist of Vehicles
 	 */
 	
@@ -111,12 +120,17 @@ public class LogVehicleData {
 			for(k = 0; k < vehicles.size(); ++k){
 				
 				vehicle = vehicles.get(k);
-				
-					writer.write(vehicle.getID()+"");
-					writer.write(" ");
+				    // steady id is fixed device id. whereas geID is relative chanageable VehicleID
+					writer.write(vehicle.getStedyID()+"");
+					writer.write(" ");		
+					
+//					writer.write(vehicle.getID()+"");
+//					writer.write(" ");
 					writer.write(vehicle.getTotalTravelDistance()+"");
 					writer.write(" ");
 					writer.write(vehicle.getTotalTravelTime()+"");
+					writer.write(" ");
+					writer.write(vehicle.totalWaitTime+"");
 					writer.write("\n");
 				} 
 
@@ -124,20 +138,82 @@ public class LogVehicleData {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
-		finally {
-			   try {writer.close();} catch (Exception ex) {/*ignore*/}
-			}
+
 	
 		
 	}
+	
+	public void logAllVehicleInfo(String fileName){
+		outputFileName = fileName;
+		logAllVehicleInfo();		
+	}
     
+	
 	public void logAllVehicleInfo(){
 		
 		LogVehicleData logVehicleData = new LogVehicleData();
 		System.out.println("\n\n ****Going to call VehicleInfo\n");
+		// No parameter is needed. getting all the vehicles from globar map instances
 		ArrayList<Vehicle> vehiclesList = logVehicleData.getAllVehicle();
 		logVehicleData.writeVehicleInfo(vehiclesList);	
 		
 	}
+    
+	public static void initialFileWriter(String fileWriterFileName){
+		try {
+			fileWriter = new FileWriter(fileWriterFileName, true);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+    public static void writeVehicleStreetInfo(Vehicle vehicle){
+    	System.out.println("write vehicle street method is called");
+    	try {
+    		System.out.println("in try method to write");
+//			fileWriter = new FileWriter(fileWriterFileName, true);
+			fileWriter.write("" + vehicle.getStedyID()+" ");
+			fileWriter.write( "vtdis:" + vehicle.getTotalTravelDistance()/100+" "); // length in meter
+			fileWriter.write( "vtt:" + vehicle.getTotalTravelTime()/1000+" ");
+			fileWriter.write( "vtwt:" + vehicle.totalWaitTime/1000+" ");
+//			fileWriter.write( "vtspeed:" + (vehicle.getTotalTravelDistance()/100/1000)/(vehicle.getTotalTravelTime()/1000/3600)+" ");
+			fileWriter.write( "vstoppings:" + vehicle.vehicleStreetInfoList.size()+" ");
+			
+			for(int i=0; i < vehicle.vehicleStreetInfoList.size(); i++){
+				VehicleStreetInfo vehicleStreetInfo = vehicle.vehicleStreetInfoList.get(i);
+//				fileWriter.write( "sn:" + vehicleStreetInfo.street.getName()+" ");
+				fileWriter.write( "sl:" + (int)(vehicleStreetInfo.street.getLength()/100)+" ");
+				fileWriter.write( "tt:" + (int)(vehicleStreetInfo.totalTime/1000)+" ");
+				fileWriter.write( "wt:" + (int)(vehicleStreetInfo.totalWaitTime/1000)+" ");
+								
+			}
+
+			
+			fileWriter.write("\n");
+			fileWriter.flush();
+			System.out.println("write vehicle street method has flushed");
+//			fileWriter.close();
+			
+
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}
+    	
+    }
+    
+	public static void closeFileWriter(){
+		try {
+			fileWriter.flush();
+			fileWriter.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 
 }

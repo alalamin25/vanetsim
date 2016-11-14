@@ -1,0 +1,34 @@
+Oct 17, 2016 7:24:18 PM global
+CONFIG: -1936MB accelerated VRAM found.
+Oct 17, 2016 7:24:19 PM vanetsim.map.Map loadMap
+FINE: Loading map from map.xml
+Oct 17, 2016 7:24:23 PM vanetsim.map.Map load
+FINE: Finished loading map.
+Oct 17, 2016 7:24:24 PM vanetsim.scenario.Scenario load
+FINE: Loading scenario from scenerio.xml
+Oct 17, 2016 7:24:26 PM vanetsim.scenario.Scenario load
+FINE: Finished loading scenario.
+Oct 17, 2016 7:24:29 PM vanetsim.scenario.Scenario load
+FINE: Loading scenario from scenerio.xml
+Oct 17, 2016 7:24:32 PM vanetsim.scenario.Scenario load
+FINE: Finished loading scenario.
+Oct 17, 2016 7:24:33 PM vanetsim.simulation.SimulationMaster startThread
+FINER: Simulation started.
+Oct 17, 2016 7:24:33 PM vanetsim.simulation.SimulationMaster run
+FINE: Preparing simulation with 8 threads. Detected 1796 MB of free heap memory.
+Oct 17, 2016 7:24:33 PM Worker startX:0 startY:0 Worker constructor
+FINEST: Created worker thread with 6 regions.
+Oct 17, 2016 7:24:33 PM Worker startX:1 startY:1 Worker constructor
+FINEST: Created worker thread with 7 regions.
+Oct 17, 2016 7:24:33 PM Worker startX:2 startY:3 Worker constructor
+FINEST: Created worker thread with 6 regions.
+Oct 17, 2016 7:24:33 PM Worker startX:3 startY:4 Worker constructor
+FINEST: Created worker thread with 6 regions.
+Oct 17, 2016 7:24:33 PM Worker startX:5 startY:0 Worker constructor
+FINEST: Created worker thread with 6 regions.
+Oct 17, 2016 7:24:33 PM Worker startX:6 startY:1 Worker constructor
+FINEST: Created worker thread with 7 regions.
+Oct 17, 2016 7:24:33 PM Worker startX:7 startY:3 Worker constructor
+FINEST: Created worker thread with 6 regions.
+Oct 17, 2016 7:24:33 PM Worker startX:8 startY:4 Worker constructor
+FINEST: Created worker thread with 6 regions.

@@ -1,0 +1,8 @@
+Created log.custom package to keep all the custom class for logging there
+Added custom on close code to vanetsim.start class
+vanetsim.gui.controlpanels; simulationGuiControlpanle for start pause button
+
+
+when refresh button is clicked log is saved to file
+package vanetsim.gui.controlpanels; reporting congrol
+package vanetsim.scenario; vehicle

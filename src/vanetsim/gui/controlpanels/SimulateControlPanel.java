@@ -9,6 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.Hashtable;
 
@@ -259,6 +264,9 @@ public final class SimulateControlPanel extends JPanel implements ActionListener
 		return slider;
 	}
 	
+	// This variable is for auto load map and secenerio
+	public boolean auto_option = true;
+	
 	/**
 	 * An implemented <code>ActionListener</code> which performs all needed actions when a <code>JButton</code>
 	 * is clicked.
@@ -293,10 +301,33 @@ public final class SimulateControlPanel extends JPanel implements ActionListener
 		} else if ("loadscenario".equals(command)){ //$NON-NLS-1$
 			VanetSimStart.getMainControlPanel().changeFileChooser(true, true, false);
 			int returnVal = VanetSimStart.getMainControlPanel().getFileChooser().showOpenDialog(VanetSimStart.getMainFrame());
-			if (returnVal == JFileChooser.APPROVE_OPTION) { 
+			
+			File f2 = new File("debug/settings.txt");
+			String debug = "";
+			BufferedReader reader = null;
+			try {
+				reader = new BufferedReader(new FileReader (f2));
+				debug = reader.readLine();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			
+			if(debug == "0" || false){
+				if (returnVal == JFileChooser.APPROVE_OPTION) { 
+					Runnable job = new Runnable() {
+						public void run() {
+							Scenario.getInstance().load(VanetSimStart.getMainControlPanel().getFileChooser().getSelectedFile(), false);
+						}
+					};
+					new Thread(job).start();
+				}
+			} else {
 				Runnable job = new Runnable() {
 					public void run() {
-						Scenario.getInstance().load(VanetSimStart.getMainControlPanel().getFileChooser().getSelectedFile(), false);
+						File f = new File("debug/scenerio.xml");
+						Scenario.getInstance().load(f, false);
 					}
 				};
 				new Thread(job).start();

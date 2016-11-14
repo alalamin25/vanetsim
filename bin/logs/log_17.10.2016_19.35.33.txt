@@ -1,0 +1,106 @@
+Oct 17, 2016 7:35:33 PM global
+CONFIG: -1936MB accelerated VRAM found.
+Oct 17, 2016 7:35:57 PM vanetsim.map.Map loadMap
+FINE: Loading map from NewYork_noTS.xml
+Oct 17, 2016 7:36:00 PM vanetsim.map.Map load
+FINE: Finished loading map.
+Oct 17, 2016 7:36:03 PM vanetsim.scenario.Scenario load
+FINE: Loading scenario from scenerio.xml
+Oct 17, 2016 7:36:03 PM vanetsim.scenario.Scenario load
+SEVERE: Error while loading scenario.
+scenerio.xml (The system cannot find the file specified)
+java.io.FileNotFoundException: scenerio.xml (The system cannot find the file specified)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at vanetsim.scenario.Scenario.load(Scenario.java:149)
+	at vanetsim.gui.controlpanels.SimulateControlPanel$3.run(SimulateControlPanel.java:330)
+	at java.lang.Thread.run(Unknown Source)
+
+Oct 17, 2016 7:36:06 PM vanetsim.scenario.Scenario load
+FINE: Finished loading scenario.
+Oct 17, 2016 7:36:11 PM vanetsim.scenario.Scenario load
+FINE: Loading scenario from scenerio.xml
+Oct 17, 2016 7:36:11 PM vanetsim.scenario.Scenario load
+SEVERE: Error while loading scenario.
+scenerio.xml (The system cannot find the file specified)
+java.io.FileNotFoundException: scenerio.xml (The system cannot find the file specified)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at vanetsim.scenario.Scenario.load(Scenario.java:149)
+	at vanetsim.gui.controlpanels.SimulateControlPanel$3.run(SimulateControlPanel.java:330)
+	at java.lang.Thread.run(Unknown Source)
+
+Oct 17, 2016 7:36:14 PM vanetsim.scenario.Scenario load
+FINE: Finished loading scenario.
+Oct 17, 2016 8:29:02 PM vanetsim.simulation.SimulationMaster startThread
+FINER: Simulation started.
+Oct 17, 2016 8:29:02 PM vanetsim.simulation.SimulationMaster run
+FINE: Preparing simulation with 8 threads. Detected 1796 MB of free heap memory.
+Oct 17, 2016 8:29:02 PM Worker startX:0 startY:0 Worker constructor
+FINEST: Created worker thread with 6 regions.
+Oct 17, 2016 8:29:02 PM Worker startX:1 startY:1 Worker constructor
+FINEST: Created worker thread with 7 regions.
+Oct 17, 2016 8:29:02 PM Worker startX:2 startY:3 Worker constructor
+FINEST: Created worker thread with 6 regions.
+Oct 17, 2016 8:29:02 PM Worker startX:3 startY:4 Worker constructor
+FINEST: Created worker thread with 6 regions.
+Oct 17, 2016 8:29:02 PM Worker startX:5 startY:0 Worker constructor
+FINEST: Created worker thread with 6 regions.
+Oct 17, 2016 8:29:02 PM Worker startX:6 startY:1 Worker constructor
+FINEST: Created worker thread with 7 regions.
+Oct 17, 2016 8:29:02 PM Worker startX:7 startY:3 Worker constructor
+FINEST: Created worker thread with 6 regions.
+Oct 17, 2016 8:29:02 PM Worker startX:8 startY:4 Worker constructor
+FINEST: Created worker thread with 6 regions.
+Oct 17, 2016 8:29:04 PM vanetsim.simulation.SimulationMaster stopThread
+FINER: Simulation stopped.
+Oct 17, 2016 8:29:08 PM Worker startX:0 startY:0 run
+FINEST: Worker thread exited.
+Oct 17, 2016 8:29:08 PM Worker startX:8 startY:4 run
+FINEST: Worker thread exited.
+Oct 17, 2016 8:29:08 PM vanetsim.scenario.Scenario load
+FINE: Loading scenario from scenerio.xml
+Oct 17, 2016 8:29:08 PM Worker startX:7 startY:3 run
+FINEST: Worker thread exited.
+Oct 17, 2016 8:29:08 PM Worker startX:2 startY:3 run
+FINEST: Worker thread exited.
+Oct 17, 2016 8:29:08 PM Worker startX:5 startY:0 run
+FINEST: Worker thread exited.
+Oct 17, 2016 8:29:08 PM Worker startX:3 startY:4 run
+FINEST: Worker thread exited.
+Oct 17, 2016 8:29:08 PM Worker startX:6 startY:1 run
+FINEST: Worker thread exited.
+Oct 17, 2016 8:29:08 PM vanetsim.scenario.Scenario load
+SEVERE: Error while loading scenario.
+scenerio.xml (The system cannot find the file specified)
+java.io.FileNotFoundException: scenerio.xml (The system cannot find the file specified)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at vanetsim.scenario.Scenario.load(Scenario.java:149)
+	at vanetsim.gui.controlpanels.SimulateControlPanel$3.run(SimulateControlPanel.java:330)
+	at java.lang.Thread.run(Unknown Source)
+
+Oct 17, 2016 8:29:11 PM Worker startX:1 startY:1 run
+FINEST: Worker thread exited.
+Oct 17, 2016 8:29:11 PM vanetsim.scenario.Scenario load
+FINE: Finished loading scenario.
+Oct 17, 2016 8:29:12 PM vanetsim.simulation.SimulationMaster startThread
+FINER: Simulation started.
+Oct 17, 2016 8:29:13 PM vanetsim.simulation.SimulationMaster run
+FINE: Preparing simulation with 8 threads. Detected 1796 MB of free heap memory.
+Oct 17, 2016 8:29:13 PM Worker startX:0 startY:0 Worker constructor
+FINEST: Created worker thread with 6 regions.
+Oct 17, 2016 8:29:13 PM Worker startX:1 startY:1 Worker constructor
+FINEST: Created worker thread with 7 regions.
+Oct 17, 2016 8:29:13 PM Worker startX:2 startY:3 Worker constructor
+FINEST: Created worker thread with 6 regions.
+Oct 17, 2016 8:29:13 PM Worker startX:3 startY:4 Worker constructor
+FINEST: Created worker thread with 6 regions.
+Oct 17, 2016 8:29:13 PM Worker startX:5 startY:0 Worker constructor
+FINEST: Created worker thread with 6 regions.
+Oct 17, 2016 8:29:13 PM Worker startX:6 startY:1 Worker constructor
+FINEST: Created worker thread with 7 regions.
+Oct 17, 2016 8:29:13 PM Worker startX:7 startY:3 Worker constructor
+FINEST: Created worker thread with 6 regions.
+Oct 17, 2016 8:29:13 PM Worker startX:8 startY:4 Worker constructor
+FINEST: Created worker thread with 6 regions.

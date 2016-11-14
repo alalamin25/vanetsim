@@ -2,12 +2,13 @@ package vanetsim.scenario;
 
 import java.awt.Color;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
 import java16.util.ArrayDeque;
-
-
+import log.custom.LogVehicleData;
+import log.custom.VehicleStreetInfo;
 import vanetsim.VanetSimStart;
 import vanetsim.gui.Renderer;
 import vanetsim.gui.controlpanels.ReportingControlPanel;
@@ -351,6 +352,27 @@ public final class Vehicle extends LaneObject{
 	
 	/** variable to log next x beacons */
 	private int logNextBeacons = 0;
+
+
+   /** This variable are created my me(Alamin) for thesis pupose
+    * 
+    */
+	public int totalWaitTime = 0;
+	// this variable is need to calculate street enter time and street exit time
+	public int curStreetEnterTime = -1;
+	public int curStreetEnterWaitTime = -1;
+	public ArrayList<VehicleStreetInfo> vehicleStreetInfoList = new ArrayList<>(); 
+	public VehicleStreetInfo curVehicleStreetInfo = new VehicleStreetInfo();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * Instantiates a new vehicle. You will get an exception if the destinations don't contain at least two <b>valid</b> elements.<br>
 	 * Elements are considered as invalid if
@@ -372,6 +394,7 @@ public final class Vehicle extends LaneObject{
 	 */
 	public Vehicle(ArrayDeque<WayPoint> destinations, int vehicleLength, int maxSpeed, int maxCommDist, boolean wiFiEnabled, boolean emergencyVehicle, int brakingRate, int accelerationRate, int timeDistance, int politeness, Color color) throws ParseException {
 		if(destinations != null && destinations.size()>1){
+//			System.out.println("Creating new vehicle stead_id_counder: " + steadyIDCounter);
 			originalDestinations_ = destinations; 
 			destinations_ = originalDestinations_.clone();			
 			ID_ = RANDOM.nextLong();
@@ -434,6 +457,7 @@ public final class Vehicle extends LaneObject{
 	 * @return <code>true</code> if new route has been found, else <code>false</code> (on error)
 	 */
 	public boolean calculateRoute(boolean careAboutDirection, boolean isReroute){
+//		System.out.println("going to calculate route for " + getStedyID());
 		try{
 			WayPoint nextPoint = destinations_.peekFirst();			
 			if(curStreet_ == nextPoint.getStreet()){
@@ -521,6 +545,9 @@ public final class Vehicle extends LaneObject{
 					active_ = false;
 					curWaitTime_ = Integer.MIN_VALUE;
 					if(totalTravelTime_ >= minTravelTimeForRecycling_) mayBeRecycled_ = true;
+					System.out.println("No route found");
+					System.out.println(getStedyID() + " has reached its destination dis: " + totalTravelDistance_+ " time: " + totalTravelTime_ + " waittime: " + totalWaitTime);
+					
 				}
 				return false;
 			}
@@ -539,14 +566,26 @@ public final class Vehicle extends LaneObject{
 	 */
 	
 	public void adjustSpeed(int timePerStep){
+		// for debugging
+//		System.out.println("adjust speed method: steadyId: " + steadyID_ + " curwaittime: " + curWaitTime_);
+		if(curWaitTime_ > 0){
+//			System.out.println(getStedyID() + " in adjustspeed method with curwaittime: " + curWaitTime_ + " timeperstep: " + timePerStep);
+		}
 		waitingForSignal_ = false;
 		if(curWaitTime_ != 0 && curWaitTime_ != Integer.MIN_VALUE){
 			if(curWaitTime_ <= timePerStep){
+				// for getting total time
+				totalWaitTime += curWaitTime_;
+				
 				curWaitTime_ = 0;
 				active_ = true;
 				brakeForDestination_ = false;
 				curStreet_.addLaneObject(this, curDirection_);
-			} else curWaitTime_ -= timePerStep;
+			} else {
+				curWaitTime_ -= timePerStep;
+				// for getting total time
+				totalWaitTime += timePerStep;
+			}
 		}
 
 		if(active_){
@@ -1946,6 +1985,7 @@ public final class Vehicle extends LaneObject{
 	 * @param timePerStep	the time per step in milliseconds
 	 */
 	public void move(int timePerStep){
+//		System.out.println("in move method with steadyId: " + getStedyID() + " curspeed: " + curSpeed_);
 		if(curWaitTime_ == 0 && curStreet_ != null){
 
 			curLane_ = newLane_;
@@ -1956,6 +1996,10 @@ public final class Vehicle extends LaneObject{
 			// ================================= 
 			double tmpPosition, newPosition = curPosition_, movement;
 			WayPoint nextTarget;
+			if(curSpeed_ == 0){
+//			System.out.println(getStedyID() + " is not moving now. so it is waiting now");
+				totalWaitTime += timePerStep;
+			}
 			movement = curSpeed_ * (timePerStep/1000.0);
 			totalTravelTime_ += timePerStep;
 			totalTravelDistance_ += movement;	// not totally precise when reaching destination but should be enough as long as timePerStep is less than a second...
@@ -1979,7 +2023,13 @@ public final class Vehicle extends LaneObject{
 						if(destinations_.isEmpty()){
 							active_ = false;	//found no new destination where we can route to
 							curWaitTime_ = Integer.MIN_VALUE;
+							
 							if(totalTravelTime_ >= minTravelTimeForRecycling_) mayBeRecycled_ = true;
+							
+						//	System.out.println(getStedyID() + " has reached its destination dis: " + totalTravelDistance_+ " time: " + totalTravelTime_ + " waittime: " + totalWaitTime);
+							updateVehicleStreetLogInfo();
+							
+							
 							break;	
 						} else brakeForDestinationCountdown_ = Integer.MAX_VALUE;
 						if(curWaitTime_ > 0){
@@ -2008,6 +2058,10 @@ public final class Vehicle extends LaneObject{
 							active_ = false;	//found no new destination where we can route to
 							curWaitTime_ = Integer.MIN_VALUE;
 							if(totalTravelTime_ >= minTravelTimeForRecycling_) mayBeRecycled_ = true;
+							// for thesis
+						//	System.out.println(getStedyID() + " has reached its destination dis: " + totalTravelDistance_+ " time: " + totalTravelTime_ + " waittime: " + totalWaitTime);
+							updateVehicleStreetLogInfo();
+							
 							break;	
 						} else brakeForDestinationCountdown_ = Integer.MAX_VALUE;
 						if(curWaitTime_ > 0){
@@ -2016,7 +2070,20 @@ public final class Vehicle extends LaneObject{
 						} else brakeForDestination_ = false;	//stop braking for destination
 					} 
 					curDirection_ = routeDirections_[routePosition_];
-					curStreet_ = routeStreets_[routePosition_];		
+					
+					
+					curStreet_ = routeStreets_[routePosition_];	
+					
+					// checking for traffic light
+					
+					
+					updateVehicleStreetLogInfo(curStreet_);
+//					System.out.println(getStedyID() + " is going to take a new street " + curStreet_.getName() + " size: " + curStreet_.getLength());
+//					
+					
+					
+					
+					
 					if(curDirection_){						
 						if(curStreet_.getStartNode() == junctionAllowed_){
 							junctionAllowed_.getJunction().allowOtherVehicle();
@@ -2068,6 +2135,11 @@ public final class Vehicle extends LaneObject{
 				curRegion_ = MAP.getRegionOfPoint(curX_, curY_);
 				curRegion_.addVehicle(this, false);
 			}			
+		}
+		else{
+			if(true){
+				System.out.println(getStedyID() + "  is not moving it is now waiting");
+			}
 		}
 
 	}
@@ -3002,6 +3074,15 @@ public final class Vehicle extends LaneObject{
 	}
 
 	/**
+	 * For logging purpose
+	 * @return stadyID_ of the vichide. This ID is fixed and wont change over time
+	 */
+	public long getStedyID() {
+		return steadyID_;
+	}
+	
+	
+	/**
 	 * Set vehicle WiFi
 	 * 
 	 * @param wiFiEnabled <code>true</code> to enable WiFi for the vehicle
@@ -3283,4 +3364,53 @@ public final class Vehicle extends LaneObject{
 	public static void setSilentPeriodsOn(boolean silentPeriodsOn) {
 		Vehicle.silentPeriodsOn = silentPeriodsOn;
 	}
+	
+	
+	
+	
+	public  void updateVehicleStreetLogInfo(Street curStreet_){
+//		System.out.println("updateVehicleStreetLogInfo " + getStedyID() + " is going to take a new street " +
+//						curStreet_.getName() + " size: " + curStreet_.getLength()+ " traffic stop time: " + 
+//				        stopTime_);
+		// negative means this is first street
+		if(curStreetEnterTime <= 0){
+					
+			
+		} else{
+			curVehicleStreetInfo.totalTime = totalTravelTime_ - curStreetEnterTime;
+			curVehicleStreetInfo.totalWaitTime = totalWaitTime - curStreetEnterWaitTime;
+			vehicleStreetInfoList.add(curVehicleStreetInfo);
+			
+			
+		}
+		
+		curVehicleStreetInfo = new VehicleStreetInfo();
+		curVehicleStreetInfo.street = curStreet_;
+		curStreetEnterTime = totalTravelTime_;
+		curStreetEnterWaitTime = totalWaitTime;				
+		
+		
+	}
+	
+	// this method will be called when the vehicle reaches its destination
+	public  void updateVehicleStreetLogInfo(){
+		System.out.println(getStedyID() + " has reached its destination dis: " + totalTravelDistance_+ " time: " + totalTravelTime_ + " waittime: " + totalWaitTime);
+		curVehicleStreetInfo.totalTime = totalTravelTime_ - curStreetEnterTime;
+		curVehicleStreetInfo.totalWaitTime = totalWaitTime - curStreetEnterWaitTime;
+		vehicleStreetInfoList.add(curVehicleStreetInfo);
+		LogVehicleData.writeVehicleStreetInfo(this);
+//		System.out.println("written the street info to file");
+	
+			
+	}
+	
+	// for thesis going to store vehicles every street info
+
 }
+
+//public class VehicleStreetInfo{
+//	public Street street;
+//	public int totalTime;
+//	public int totalWaitTime;
+//			
+//}

@@ -1,0 +1,2 @@
+vehicle_id: 0 sn:Avenue A sl:8369.86075152986 tt:5920 wt:0 sn:East 10th Street sl:13295.4826915009 tt:7720 wt:0 vtdis:18522 vtt:17720 vtwt:10 
+vehicle_id: 1 sn:Avenue A sl:8575.402556148603 tt:4440 wt:0 sn:Avenue A sl:8369.86075152986 tt:12640 wt:5320 sn:East 9th Street sl:24099.348455923035 tt:29160 wt:0 sn:1st Avenue sl:8382.013421607007 tt:6920 wt:0 sn:East 10th Street sl:24127.363138146695 tt:23880 wt:0 vtdis:70796 vtt:79920 vtwt:5330 
