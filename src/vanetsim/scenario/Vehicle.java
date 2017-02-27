@@ -18,6 +18,7 @@ import vanetsim.map.Map;
 import vanetsim.map.Node;
 import vanetsim.map.Region;
 import vanetsim.map.Street;
+import vanetsim.map.TrafficLight;
 import vanetsim.routing.RoutingAlgorithm;
 import vanetsim.routing.WayPoint;
 import vanetsim.routing.A_Star.A_Star_Algorithm;
@@ -361,6 +362,8 @@ public final class Vehicle extends LaneObject{
 	// this variable is need to calculate street enter time and street exit time
 	public int curStreetEnterTime = -1;
 	public int curStreetEnterWaitTime = -1;
+	public int maxTrafficSignalWaitTime = 0;
+	public int myTrafficSignalWaitTime = 0;
 	public ArrayList<VehicleStreetInfo> vehicleStreetInfoList = new ArrayList<>(); 
 	public VehicleStreetInfo curVehicleStreetInfo = new VehicleStreetInfo();
 	
@@ -395,6 +398,7 @@ public final class Vehicle extends LaneObject{
 	public Vehicle(ArrayDeque<WayPoint> destinations, int vehicleLength, int maxSpeed, int maxCommDist, boolean wiFiEnabled, boolean emergencyVehicle, int brakingRate, int accelerationRate, int timeDistance, int politeness, Color color) throws ParseException {
 		if(destinations != null && destinations.size()>1){
 //			System.out.println("Creating new vehicle stead_id_counder: " + steadyIDCounter);
+	//		System.out.println(vehicleStreetInfoList.size());
 			originalDestinations_ = destinations; 
 			destinations_ = originalDestinations_.clone();			
 			ID_ = RANDOM.nextLong();
@@ -1611,6 +1615,7 @@ public final class Vehicle extends LaneObject{
 	 * </ul>
 	 */
 	public void sendMessages(){
+//		System.out.println("sendMessage method is called");
 		communicationCountdown_ += communicationInterval_;
 		if(beaconsEnabled_ && !isInMixZone_){
 			Message[] messages = knownMessages_.getForwardMessages();
@@ -1746,6 +1751,7 @@ public final class Vehicle extends LaneObject{
 						//send to Road-Side-Units
 						rsus = regions_[i][j].getRSUs();	//use the array as it's MUCH faster!
 						size = rsus.length;
+						System.out.println("RSU amount: " + size);
 						for(k = 0; k < size; ++k){
 							rsu = rsus[k];
 							// precheck if the rsu is near enough and valid (check is not exact as its a rectangular box and not circle)
@@ -2081,7 +2087,9 @@ public final class Vehicle extends LaneObject{
 //					System.out.println(getStedyID() + " is going to take a new street " + curStreet_.getName() + " size: " + curStreet_.getLength());
 //					
 					
-					
+					// Going to check if this street has traffic light or not and traffic light lenght
+					updateTrafficLightInfo(curStreet_);
+
 					
 					
 					if(curDirection_){						
@@ -2465,6 +2473,18 @@ public final class Vehicle extends LaneObject{
 		curRegion_.addVehicle(this, false);
 		
 		mayBeRecycled_ = false;
+		
+		totalWaitTime = 0;
+		// this variable is need to calculate street enter time and street exit time
+		curStreetEnterTime = -1;
+		curStreetEnterWaitTime = -1;
+		maxTrafficSignalWaitTime = 0;
+		myTrafficSignalWaitTime = 0;
+		vehicleStreetInfoList = new ArrayList<>(); 
+		curVehicleStreetInfo = new VehicleStreetInfo();
+		
+		
+		
 	}
 	
 	/**
@@ -3366,19 +3386,38 @@ public final class Vehicle extends LaneObject{
 	}
 	
 	
-	
+	public void updateTrafficLightInfo(Street curStreet){
+		if(curStreet_.getStartNode().isHasTrafficSignal_()){
+			TrafficLight trafficLight = curStreet_.getStartNode().getTrafficLight_();
+//			System.out.println("Start Node: This street has traffic light and this light's green time: " + trafficLight.getGreenPhaseLength() + " yellow: " + trafficLight.getYellowPhaseLength() + " red: " + trafficLight.getRedPhaseLength());
+			curVehicleStreetInfo.maxTrafficSignalWaitTime =(int) (trafficLight.getYellowPhaseLength() + trafficLight.getRedPhaseLength());
+			maxTrafficSignalWaitTime += trafficLight.getYellowPhaseLength() + trafficLight.getRedPhaseLength();
+		}
+//		if(curStreet_.getEndNode().isHasTrafficSignal_()){
+//			TrafficLight trafficLight = curStreet_.getStartNode().getTrafficLight_();
+//			System.out.println("End Node: This street has traffic light and this light's green time: " + trafficLight.getGreenPhaseLength() + " yellow: " + trafficLight.getYellowPhaseLength() + " red: " + trafficLight.getRedPhaseLength());
+//		}
+	}
 	
 	public  void updateVehicleStreetLogInfo(Street curStreet_){
 //		System.out.println("updateVehicleStreetLogInfo " + getStedyID() + " is going to take a new street " +
 //						curStreet_.getName() + " size: " + curStreet_.getLength()+ " traffic stop time: " + 
 //				        stopTime_);
 		// negative means this is first street
+		
+//		System.out.println("\nroadsite unit size: " + knownRSUsList_.getSize());
 		if(curStreetEnterTime <= 0){
 					
 			
 		} else{
 			curVehicleStreetInfo.totalTime = totalTravelTime_ - curStreetEnterTime;
 			curVehicleStreetInfo.totalWaitTime = totalWaitTime - curStreetEnterWaitTime;
+			if(curVehicleStreetInfo.totalWaitTime > curVehicleStreetInfo.maxTrafficSignalWaitTime){
+			   maxTrafficSignalWaitTime	+= curVehicleStreetInfo.maxTrafficSignalWaitTime;
+			} else{
+				myTrafficSignalWaitTime += curVehicleStreetInfo.totalWaitTime;
+				
+			}
 			vehicleStreetInfoList.add(curVehicleStreetInfo);
 			
 			
@@ -3387,7 +3426,13 @@ public final class Vehicle extends LaneObject{
 		curVehicleStreetInfo = new VehicleStreetInfo();
 		curVehicleStreetInfo.street = curStreet_;
 		curStreetEnterTime = totalTravelTime_;
-		curStreetEnterWaitTime = totalWaitTime;				
+		curStreetEnterWaitTime = totalWaitTime;		
+		
+		
+		
+
+		
+
 		
 		
 	}
@@ -3397,11 +3442,25 @@ public final class Vehicle extends LaneObject{
 		System.out.println(getStedyID() + " has reached its destination dis: " + totalTravelDistance_+ " time: " + totalTravelTime_ + " waittime: " + totalWaitTime);
 		curVehicleStreetInfo.totalTime = totalTravelTime_ - curStreetEnterTime;
 		curVehicleStreetInfo.totalWaitTime = totalWaitTime - curStreetEnterWaitTime;
+		
 		vehicleStreetInfoList.add(curVehicleStreetInfo);
 		LogVehicleData.writeVehicleStreetInfo(this);
 //		System.out.println("written the street info to file");
+		
+		
 	
-			
+		RSU[] rsus = null;
+		RSU rsu = null;
+		for(int i = 0; i < regions_.length; ++i){
+			for(int j = 0; j < regions_[i].length; ++j){
+				rsus = regions_[i][j].getRSUs();	//use the array as it's MUCH faster!
+				int size = rsus.length;
+//				System.out.println("RSU amount: " + size);				
+
+			}
+		}
+		
+		
 	}
 	
 	// for thesis going to store vehicles every street info

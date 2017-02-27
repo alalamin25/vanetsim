@@ -1,0 +1,35 @@
+
+  fs = 16;
+    fn = 'Times New Roman';
+             
+             
+         
+          load pktDrop.txt
+          xa = pktDrop(:,1);
+          ya = pktDrop(:,2);
+          yb = pktDrop(:,3);
+          
+          plot(xa,ya,'--bo'); 
+          hold all;
+          plot(xa,yb,'-ks'); 
+%        axis([20, 100, 0, 820]);
+          
+                
+          
+    ylabel('Avge Throughput (Mbps)','FontSize',fs,'FontName',fn);
+    xlabel({'Number of LFNs'},'FontSize',fs,'FontName',fn);
+    
+      fs = 14;
+    
+%     h = legend('HMIPv6 using CSM','SIGMA with RWP',0);
+set(h,'FontSize',fs,'FontName',fn,'Location','Best');
+set(h,'Interpreter','latex')
+set(h, 'Box', 'on');
+set(h, 'Color', 'none');
+
+fs = 14;
+set(gca,'FontSize',fs,'FontName',fn);
+
+
+
+          

@@ -1,2 +1,0 @@
-Oct 17, 2016 7:07:54 PM global
-CONFIG: -1936MB accelerated VRAM found.

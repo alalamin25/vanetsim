@@ -114,7 +114,7 @@ public class SilentPeriodPanel extends JPanel implements ActionListener, FocusLi
 		Vehicle.setTIME_OF_SILENT_PERIODS(((Number)silentPeriodDuration_.getValue()).intValue());
 		Vehicle.setSilentPeriodsOn(enableSilentPeriods_.isSelected());
 		
-		System.out.println("save attributes" + Vehicle.getTIME_BETWEEN_SILENT_PERIODS());
+//		System.out.println("save attributes" + Vehicle.getTIME_BETWEEN_SILENT_PERIODS());
 	}
 	
 	public void loadAttributes(){

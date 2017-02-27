@@ -34,6 +34,7 @@ public class KnownRSUsList{
 	 * Empty constructor.
 	 */
 	public KnownRSUsList(){
+//		System.out.println("\nRSU List is created");
 		for(int i = 0; i < HASH_SIZE; ++i){
 			head_[i] = null;
 		}
@@ -49,6 +50,7 @@ public class KnownRSUsList{
 	 * @param isEncrypted	if Beacon was encrypted
 	 */
 	public synchronized void updateRSU(RSU rsu, long ID, int x, int y, boolean isEncrypted){
+//		System.out.println("\nRSU List added or updated");
 		boolean found = false;
 		int hash = (int)(ID % HASH_SIZE);
 		if(hash < 0) hash = -hash;

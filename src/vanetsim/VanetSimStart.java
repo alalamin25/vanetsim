@@ -131,6 +131,11 @@ public final class VanetSimStart implements Runnable {
 				File f = new File("debug/map.xml");
 				if(f.exists()){
 					Map.getInstance().load(f, false);
+					Map MAP = Map.getInstance();
+					System.out.println("map has been loaded");
+					System.out.println("MAP width: " + MAP.getMapWidth());
+					System.out.println("Map height: " + MAP.getMapHeight());
+					
 				} else{
 					System.out.println("cant auto load map because map.xml doesnot exist");
 //					Map.getInstance().load(f, false);

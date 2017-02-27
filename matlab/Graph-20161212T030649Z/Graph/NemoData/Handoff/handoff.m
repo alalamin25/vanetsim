@@ -1,0 +1,29 @@
+                 
+         load hand.txt
+          xa = hand(:,1);
+          ya = hand(:,2);
+          yb = hand(:,3);
+          yc = hand(:,4);
+          
+          plot(xa,ya,'--bo'); 
+          hold all;
+          plot(xa,yb,'-ks'); 
+        axis([5, 25, 0, 16]);
+         plot(xa,yc,'-rp'); 
+          
+    fs = 16;
+    fn = 'Times New Roman';   
+       
+    ylabel('Number of handoffs / 1000 sec','FontSize',fs,'FontName',fn);
+    xlabel({'Speed limit (meter/sec)'},'FontSize',fs,'FontName',fn);
+    
+      fs = 14;
+   h = legend('\phi = 0.3, \tau = 30 sec','\phi = 0.4, \tau = 50 sec','\phi = 0.5, \tau = 70 sec', 0);
+set(h,'FontSize',fs,'FontName',fn,'Location','Best');
+
+fs = 14;
+set(gca,'FontSize',fs,'FontName',fn);
+
+
+
+          
