@@ -3449,16 +3449,16 @@ public final class Vehicle extends LaneObject{
 		
 		
 	
-		RSU[] rsus = null;
-		RSU rsu = null;
-		for(int i = 0; i < regions_.length; ++i){
-			for(int j = 0; j < regions_[i].length; ++j){
-				rsus = regions_[i][j].getRSUs();	//use the array as it's MUCH faster!
-				int size = rsus.length;
-//				System.out.println("RSU amount: " + size);				
-
-			}
-		}
+//		RSU[] rsus = null;
+//		RSU rsu = null;
+//		for(int i = 0; i < regions_.length; ++i){
+//			for(int j = 0; j < regions_[i].length; ++j){
+//				rsus = regions_[i][j].getRSUs();	//use the array as it's MUCH faster!
+//				int size = rsus.length;
+////				System.out.println("RSU amount: " + size);				
+//
+//			}
+//		}
 		
 		
 	}

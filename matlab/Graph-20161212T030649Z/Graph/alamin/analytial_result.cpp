@@ -7,8 +7,8 @@ using namespace std;
 
 int main(){
 	float a=4;		//km , = 36000 meter
-	float b=24;
-	b = 10;		//km, = 24000 meter
+	float b=9;
+//	b = 10;		//km, = 24000 meter
 	float Sx= 0.2;	//km = 200 m
 	float Sy= 0.090;	// km = 200m
 	float K = 5;
@@ -41,6 +41,8 @@ int main(){
     float ET = Tx + Ty + Txroad;
     ET = ET / 60;
     cout << "Ex is : " << ET << " min " << endl;
+
+    cin >> ET;
 
 
 		// so radius = 200*5 /2 = 500 meter

@@ -161,6 +161,7 @@ public class LogVehicleData {
     
 	public static void initialFileWriter(String fileWriterFileName){
 		try {
+			System.out.println("initiallizying file writere: filename: " + fileWriterFileName);
 			fileWriter = new FileWriter(fileWriterFileName, true);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -168,17 +169,17 @@ public class LogVehicleData {
 		}
 	}
 	
-//    public static void writeVehicleStreetInfo(Vehicle vehicle){
-////    	System.out.println("write vehicle street method is called");
-//    	try {
-//    		
-//    		
-////    		System.out.println("in try method to write");
-////			fileWriter = new FileWriter(fileWriterFileName, true);
-//			fileWriter.write("" + vehicle.getStedyID()+" ");
-//			fileWriter.write( "vtdis:" + vehicle.getTotalTravelDistance()/100+" "); // length in meter
-//			fileWriter.write( "vtt:" + vehicle.getTotalTravelTime()/1000+" ");
-//			fileWriter.write( "vtwt:" + vehicle.totalWaitTime/1000+" ");
+    public static void writeVehicleStreetInfo(Vehicle vehicle){
+//    	System.out.println("write vehicle street method is called");
+    	try {
+    		
+    		
+//    		System.out.println("in try method to write");
+//			fileWriter = new FileWriter(fileWriterFileName, true);
+			fileWriter.write("" + vehicle.getStedyID()+" ");
+			fileWriter.write( "vtdis:" + vehicle.getTotalTravelDistance()/100+" "); // length in meter
+			fileWriter.write( "vtt:" + vehicle.getTotalTravelTime()/1000+" ");
+			fileWriter.write( "vtwt:" + vehicle.totalWaitTime/1000+" ");
 ////			fileWriter.write( "vtspeed:" + (vehicle.getTotalTravelDistance()/100/1000)/(vehicle.getTotalTravelTime()/1000/3600)+" ");
 //			fileWriter.write("maxTF:" + vehicle.maxTrafficSignalWaitTime/1000 + " ");
 //			fileWriter.write("myTF:" + vehicle.myTrafficSignalWaitTime/1000 + " ");
@@ -192,53 +193,53 @@ public class LogVehicleData {
 //				fileWriter.write( "wt:" + (int)(vehicleStreetInfo.totalWaitTime/1000)+" ");
 //								
 //			}
+
+			
+			fileWriter.write("\n");
+			fileWriter.flush();
+//			System.out.println("write vehicle street method has flushed");
+//			fileWriter.close();
+			
+         
+    		
+//
+//			fileWriter.write("" + vehicle.getStedyID()+" ");
+//			fileWriter.write( "vtdis:" + vehicle.getTotalTravelDistance()/100+" "); // length in meter
+//			fileWriter.write( "vtt:" + vehicle.getTotalTravelTime()/1000+" ");
+//			fileWriter.write( "vtwt:" + vehicle.totalWaitTime/1000+" ");
+////			fileWriter.write( "vtspeed:" + (vehicle.getTotalTravelDistance()/100/1000)/(vehicle.getTotalTravelTime()/1000/3600)+" ");
+////			fileWriter.write("maxTF:" + vehicle.maxTrafficSignalWaitTime/1000 + " ");
+////			fileWriter.write("myTF:" + vehicle.myTrafficSignalWaitTime/1000 + " ");
+//			fileWriter.write( "vsstops:" + vehicle.vehicleStreetInfoList.size()+" ");
+//			fileWriter.write( " ");
+//			
+//			
+//
 //
 //			
 //			fileWriter.write("\n");
 //			fileWriter.flush();
-////			System.out.println("write vehicle street method has flushed");
-////			fileWriter.close();
-//			
-//         
-//    		
-////
-////			fileWriter.write("" + vehicle.getStedyID()+" ");
-////			fileWriter.write( "vtdis:" + vehicle.getTotalTravelDistance()/100+" "); // length in meter
-////			fileWriter.write( "vtt:" + vehicle.getTotalTravelTime()/1000+" ");
-////			fileWriter.write( "vtwt:" + vehicle.totalWaitTime/1000+" ");
-//////			fileWriter.write( "vtspeed:" + (vehicle.getTotalTravelDistance()/100/1000)/(vehicle.getTotalTravelTime()/1000/3600)+" ");
-//////			fileWriter.write("maxTF:" + vehicle.maxTrafficSignalWaitTime/1000 + " ");
-//////			fileWriter.write("myTF:" + vehicle.myTrafficSignalWaitTime/1000 + " ");
-////			fileWriter.write( "vsstops:" + vehicle.vehicleStreetInfoList.size()+" ");
-////			fileWriter.write( " ");
-////			
-////			
-////
-////
-////			
-////			fileWriter.write("\n");
-////			fileWriter.flush();
-//			System.out.println("log flushed to file");
-////			System.out.println("write vehicle street method has flushed");
-////			fileWriter.close();
-//			
-//			
-//		}
-//    	catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			
-//			e.printStackTrace();
-//		}
-//    	
-//    }
-//    
-    
-    
-    public static void writeVehicleStreetInfo(Vehicle vehicle){
-    	System.out.println("file writer method is called");
-
+			System.out.println("log flushed to file");
+//			System.out.println("write vehicle street method has flushed");
+//			fileWriter.close();
+			
+			
+		}
+    	catch (IOException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}
     	
     }
+    
+    
+    
+//    public static void writeVehicleStreetInfo(Vehicle vehicle){
+//    	System.out.println("file writer method is called");
+//
+//    	
+//    }
     
 	public static void closeFileWriter(){
 		try {
